@@ -29,23 +29,31 @@ en el repositorio.
 con Ekiga, un cliente de VoIP para GNOME. Responde a las siguientes
 cuestiones:
 * ¿Cuántos paquetes componen la captura?
+	954 paquetes
 * ¿Cuánto tiempo dura la captura?
+	56,149 segundos
 * ¿Qué IP tiene la máquina donde se ha efectuado la captura? ¿Se
 trata de una IP pública o de una IP privada? ¿Por qué lo sabes?
+	192.168.1.34 que es una IP privada.
 
 3. Antes de analizar las tramas, mira las estadı́sticas generales que aparecen en el menú de Statistics. En el apartado de jerarquı́a de protocolos (Protocol Hierarchy) se puede ver el porcentaje del tráfico
 correspondiente al protocolo TCP y UDP.
 * ¿Cuál de los dos es mayor? ¿Tiene esto sentido si estamos hablando
 de una aplicación que transmite en tiempo real?
+	Es mayor el porcentaje de paquetes UDP que tiene sentido tratandose de una aplicacion en tiempo real que sabemos que funcionan sobre el protocolo UDP.
 * ¿Qué otros protocolos podemos ver en la jerarquı́a de protocolos?
 ¿Cuales crees que son señal y cuales ruido?
+	Tenemos protocolos DNS, TCP, HTTP, STUN, SIP, RTP, SDP, ARP y ICMP. De ellos son señal los paquetes SIP y RTP, quedando todo lo demas como ruido.
 
 4. Observa por encima el flujo de tramas en el menú de Statistics en IO
 Graphs. La captura que estamos viendo incluye desde la inicialización
 (registro) de la aplicación hasta su finalización, con una llamada entremedias.
 * Filtra por sip para conocer cuándo se envı́an paquetes SIP. ¿En
 qué segundos tienen lugar esos envı́os?
+	25 paquetes SIP que se envian en los siguientes tramos entre 7-8 segundos, 14-18 segundos, 37-41 segundos y 54-56 segundos de la captura
 * Y los paquetes con RTP, ¿cuándo se envı́an?
+	Se envian entre los 17-39 segundos teniendo su pico en el segundo 27.
+
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 5. Analiza las dos primeras tramas de la captura.
