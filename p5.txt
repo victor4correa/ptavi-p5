@@ -101,12 +101,16 @@ SIP?
 
 9. Fijémonos en las tramas siguientes a la número 46:
 * ¿Se registra con éxito en el primer intento?
+	No.
 * ¿Cómo sabemos si el registro se ha realizado correctamente o no?
+	Debido a que el siguiente paquete SIP recibe un 401 unauthorized
 * ¿Podrı́as identificar las diferencias entre el primer intento y el
 segundo de registro? (fı́jate en el tamaño de los paquetes y mira
 a qué se debe el cambio)
+	En el segundo intento añadimos el campo Authorization donde añadimos el "nonce" que nos vino en la respuesta SIP del 401.
 * ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica
 las unidades.
+	3600 segundos.
 
 10. Una vez registrados, podemos efectuar una llamada. Vamos a probar
 con el servicio de eco de Ekiga que nos permite comprobar si nos
@@ -114,18 +118,27 @@ hemos conectado correctamente. El servicio de eco tiene la dirección
 sip:500@ekiga.net. Veamos el INVITE de cerca.
 * ¿Puede verse el nombre del que efectúa la llamada, ası́ como su
 dirección SIP?
+	Si en el campo SIP address
 * ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
+	Esta en formato SDP y contiene las cabeceras "sesion","Id Session", "Connection Information","Time Descrption", "Media Descrption" y los "Media Attributes"
 * ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
+	No ya que recibe como respuesta un 407 requiriendo una autenticacion de proxy
 * ¿En qué se diferencia el segundo INVITE más abajo del primero?
 ¿A qué crees que se debe esto?
+	En este INVITE se añade la cabecera Proxy Authorization donde va el "nonce" que fue recibido en el mensaje 407 de respuesta. Esta cabecera se añade para superar un control de seguridad proxy.
 
 11. Una vez conectado, estudia el intercambio de tramas.
 * ¿Qué protocolo(s) se utiliza(n)? ¿Para qué sirven estos protocolos?
+	Se utiliza el protocolo RTP y H.261. En los paquetes H.261 se transporta el video de la llamada mientras que en los paquetes RTP se transporta el audio siempre en paquetes de 214 bytes.
 * ¿Cuál es el tamaño de paquete de los mismos?
+	Los de audio (RTP) 214 bytes mientras que los de video (H.261) varian de tamaño en funcion del video que se transporte.
 * ¿Se utilizan bits de padding?
+	No.
 * ¿Cuál es la periodicidad de los paquetes (en origen; nota que la
 captura es en destino)?
+	En los paquetes RTP la periodicidad es de 160 segundos mientras que los H.261 tienen una periodicidad de 3600 segundos
 * ¿Cuántos bits/segundo se envı́an?
+	64 Kbps
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una
