@@ -144,39 +144,55 @@ captura es en destino)?
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una
 opción RTP. Empecemos mirando los flujos RTP.
 * ¿Cuántos flujos hay? ¿por qué?
+	Hay dos flujos debido a que uno se corresponde con los paquetes de audio y otro a los de video.
 * ¿Cuántos paquetes se pierden?
+	Ninguno
 * ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el
 valor de delta?
+	1290 milisegundos y este valor es la diferencia de tiempo desde que se recibió el ultimo paquete y se recibe el siguiente
 * ¿Cuáles son los valores de jitter (medio y máximo)? ¿Qué
 quiere decir eso? ¿Crees que estamos ante una conversación de
 calidad?
+	En los paquetes de audio el jitter medio es 42,5 ms y el maximo 119,63 ms, mientras que en los paquetes de video el jitter medio es 153,24 ms y el maximo 183,095 ms.
+	Tenemos un jitter y delta alto por lo que la conversacion no será de calidad.
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony
 -> RTP -> Stream Analysis.
 * ¿Cuánto valen el delta y el jitter para el primer paquete que
 ha llegado?
+	En el primer paquete de audio ambos valores estan a 0.
 * ¿Podemos saber si éste es el primer paquete que nos han enviado?
+	Si, mirando su delta y jitter que estarán con valor 0 si es el primero.
 * Los valores de jitter son menores de 10ms hasta un paquete
 dado. ¿Cuál?
+	Hasta el paquete 247 donde el valor de jitter es 38.82 ms
 * ¿A qué se debe el cambio tan brusco del jitter?
+	Se debe a que tenemos una bajada considerable de ancho de banda que hará que tarden mas en llegar los paquetes.
 * ¿Es comparable el cambio en el valor de jitter con el del delta?
 ¿Cual es más grande?
+	Es mucho mas grande el cambio que sufre la delta que pasa de 24 a 554,74 ms, mientras que el jitter pasa de 5.76 a 38.82 ms
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la
 llamada de voz IP capturada en una ventana emergente. Selecciona
 esa llamada y pulsa el botón Graph.
 * ¿Cuánto dura la conversación?
+	25 segundos.
 * ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
-
+	Hay 2 SSRC, 0x43306582 correspondiente a los paquetes de video y el 0xBF4AFD37 correspondiente a los paquetes de audio. No hay CSRCs
 15. Identifica la trama donde se finaliza la conversación.
 * ¿Qué método SIP se utiliza?
+	Utiliza el metodo BYE
 * ¿En qué trama(s)?
+	En la 924, 925, 927 y 933
 * ¿Por qué crees que se envı́a varias veces?
-
+	Para cerrar la conversacion lo antes posible.
 16. Finalmente, se cierra la aplicación de VozIP.
 * ¿Por qué aparece una instrucción SIP del tipo REGISTER?
+	Para dar de baja al usuario en el servidor de nombres ya que el campo expires va a 0.
 * ¿En qué trama sucede esto?
+	En la tramas 950 hace la primera peticion pero al necesitar autorizacion requiere de una trama mas para darse de baja que es la 952.
 * ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión)?
+	La diferencia esta que en el campo expires ponemos el valor 0 que indica la solicitud de dar de baja al usuario.
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 Captura de una sesión SIP
