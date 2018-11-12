@@ -210,19 +210,29 @@ Ekiga para ver todo el proceso3 .
 19. Observa las diferencias en el inicio de la conversación entre el entorno
 del laboratorio y el del ejercicio anterior4 :
 * ¿Se utilizan DNS y STUN? ¿Por qué?
+	No se utilizan ni dns ni stun debido a que estamos conectados en una red de area local y por lo tanto no estamos tras una red de tipo NAT.
 * ¿Son diferentes el registro y la descripción de la sesión?
-
+	Son practicamente iguales solo que en esta sesion se envian dos paquetes OPTIONS
 20. Identifica las diferencias existentes entre esta conversación y la conversación anterior:
 * ¿Cuántos flujos tenemos?
+	Dos flujos uno en cada direcion de la conversacion.
 * ¿Cuál es su periodicidad?
+	
 * ¿Cuánto es el valor máximo del delta y los valores medios y
 máximo del jitter?
+	En el trayecto de ida (envio) tenemos un valor max de delta de 206 ms, un valor medio de jitter de 35.077 ms y un valor maximo de jitter de 43.58 ms.
+	En el trayecto de vuelta (recepcion) tenemos un valor max de delta de 31.49 ms, un valor medio de jitter de 0.67 ms y un valor maximo de jitter de 1.84 ms
+
 * ¿Podrı́as reproducir la conversación desde Wireshark? ¿Cómo?
+	Si se puede reproducir a traves de la opcion VOIPcalls dando un valor al buffer de jitter y reproduciendo.
 Comprueba que poniendo un valor demasiado pequeño para el
 buffer de jitter, la conversación puede no tener la calidad necesaria.
-* ¿Sabrı́as decir qué tipo de servicio ofrece sip:500@ekiga.net?
-[Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
+
+* ¿Sabrı́as decir qué tipo de servicio ofrece sip:500@ekiga.net?
+	Te ofrece un servicio en el que se te devuelve un anuncio de audio.
+[Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
+	
 
 21. Filtra por los paquetes SIP de la captura y guarda únicamente los
 paquetes SIP como p5.pcapng. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás añadirlo al repositorio.
